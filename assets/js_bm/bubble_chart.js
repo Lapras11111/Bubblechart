@@ -197,8 +197,8 @@ var griffweiteCenters = { // Center locations of the bubbles.
     'hat handy nicht in Griffweite beim schlafen': 1000
   };
   var griffweitealterCenters = { // Center locations of the bubbles.
-    1: { x: 300, y: height / 2 },
-    2: { x: 500, y: height / 2 },
+    1: { x: 300, y: height / 1.8},
+    2: { x: 500, y: height / 1.9},
     3: { x: 600, y: height / 2 },
     4: { x: 800, y: height / 2 }
   };
@@ -211,7 +211,7 @@ var griffweiteCenters = { // Center locations of the bubbles.
   };
   
     var griffweitegeschlechtCenters = { // Center locations of the bubbles.
-    1: { x: 300, y: height / 2 },
+    1: { x: 300, y: height / 2},
     2: { x: 500, y: height / 2 },
     3: { x: 600, y: height / 2 },
     4: { x: 700, y: height / 2 },
