@@ -99,10 +99,10 @@ var yearCenters = { // Center locations of the bubbles.
     
     '2021': 140,
     '2022': 380,
-    '2023': 580,
-    '2024': 750,
-    '2025': 750,
-    '2026': 950
+    '2023': 560,
+    '2024': 720,
+    '2025': 850,
+    '2026': 1000
   };
     
 
@@ -191,10 +191,10 @@ var griffweiteCenters = { // Center locations of the bubbles.
   };
 
   var griffweiteTitleX = { // X locations of the year titles.
-    'hat handy beim schlafen immer in griffweite': 100,
-    'hat handy beim schlafen eher in griffweite': 400,
-    'hat handy beim schlafen eher nicht in griffweite': 700,
-    'hat handy nicht in griffweite beim schlafen': 1000
+    'hat handy beim schlafen immer in Griffweite': 100,
+    'hat handy beim schlafen eher in Griffweite': 400,
+    'hat handy beim schlafen eher nicht in Griffweite': 700,
+    'hat handy nicht in Griffweite beim schlafen': 1000
   };
   var griffweitealterCenters = { // Center locations of the bubbles.
     1: { x: 300, y: height / 2 },
@@ -204,10 +204,27 @@ var griffweiteCenters = { // Center locations of the bubbles.
   };
 
   var griffweitealterTitleX = { // X locations of the year titles.
-    'hat handy beim schlafen immer in griffweite': 100,
-    'hat handy beim schlafen eher in griffweite': 400,
-    'hat handy beim schlafen eher nicht in griffweite': 700,
-    'hat handy nicht in griffweite beim schlafen': 1000
+    'Jung, in der Nähe': 150,
+    'Jung nicht in der Nähe': 540,
+    'Alt in der Nähe': 750,
+    'Alt nicht in der nähe': 1000
+  };
+  
+    var griffweitegeschlechtCenters = { // Center locations of the bubbles.
+    1: { x: 300, y: height / 2 },
+    2: { x: 500, y: height / 2 },
+    3: { x: 600, y: height / 2 },
+    4: { x: 700, y: height / 2 },
+      5: { x: 800, y: height / 2 }
+      
+  };
+  
+  var griffweitegeschlechtTitleX = { // X locations of the year titles.
+    'in Griffweite M': 100,
+    'in Griffweite W': 450,
+    'nicht in Griffweite M': 650,
+    'nicht in Griffweite W': 850,
+    'sonst': 1000
   };
        
        
@@ -279,7 +296,11 @@ var griffweiteCenters = { // Center locations of the bubbles.
         
         sorgen: d.sorgenbarometer,
       griffweite: d.griffweite,
+       
+       griffweitegeschlecht: d.griffweitegeschlecht,
         griffweitealter: d.griffweitealter,
+      
+        
         
         
         
@@ -383,6 +404,7 @@ var griffweiteCenters = { // Center locations of the bubbles.
     hideSorgen();
     hideGriffweite();
     hideGriffweitealter();
+    hideGriffweitegeschlecht();
     
     force.on('tick', function (e) {
       bubbles.each(moveToCenter(e.alpha))
@@ -428,6 +450,7 @@ Die Positionierung basiert auf dem alpha Parameter des force layouts und wird kl
    hideSorgen();
    hideGriffweite();
    hideGriffweitealter();
+    hideGriffweitegeschlecht();
 
 
     force.on('tick', function (e) {
@@ -479,6 +502,7 @@ function moveToYear(alpha) {
    hideSorgen();
    hideGriffweite();
    hideGriffweitealter();
+    hideGriffweitegeschlecht();
 
 
     force.on('tick', function (e) {
@@ -530,6 +554,7 @@ function moveToAgecat(alpha) {
     hideSorgen();
     hideGriffweite();
     hideGriffweitealter();
+     hideGriffweitegeschlecht();
 
 
     force.on('tick', function (e) {
@@ -581,6 +606,7 @@ function moveToAgecat(alpha) {
     hideSorgen();
     hideGriffweite();
     hideGriffweitealter();
+     hideGriffweitegeschlecht();
 
 
     force.on('tick', function (e) {
@@ -632,6 +658,7 @@ function moveToAgecat(alpha) {
     hideScreentime();
     hideGriffweite();
     hideGriffweitealter();
+     hideGriffweitegeschlecht();
 
     force.on('tick', function (e) {
       bubbles.each(moveToSorgen(e.alpha))
@@ -683,6 +710,7 @@ function moveToAgecat(alpha) {
     hideScreentime();
     hideSorgen();
     hideGriffweitealter();
+     hideGriffweitegeschlecht();
 
     force.on('tick', function (e) {
       bubbles.each(moveToGriffweite(e.alpha))
@@ -722,7 +750,7 @@ function moveToAgecat(alpha) {
    
     //* ------------------------------------------------------------------
 //
-// Griffweite
+// Griffweitealter
 //
 //
 // -----------------------------------------------------------------*/
@@ -734,7 +762,8 @@ function moveToAgecat(alpha) {
     hideAgecat();
     hideScreentime();
     hideSorgen();
-    hideGriffweitealter();
+    hideGriffweite();
+     hideGriffweitegeschlecht();
   
 
     force.on('tick', function (e) {
@@ -748,7 +777,7 @@ function moveToAgecat(alpha) {
 
   function moveToGriffweitealter(alpha) {
     return function (d) {
-      var target = griffweiteCenters[d.griffweite];
+      var target = griffweitealterCenters[d.griffweitealter];
       d.x = d.x + (target.x - d.x) * damper * alpha * 1.1;
       d.y = d.y + (target.y - d.y) * damper * alpha * 1.1;
     };
@@ -760,17 +789,72 @@ function moveToAgecat(alpha) {
 
   function showGriffweitealter() {
 
-    var griffweiteData = d3.keys(griffweitealterTitleX);
-    var griffweite = svg.selectAll('.griffweitealter')
-      .data(griffweiteData);
+    var griffweitealterData = d3.keys(griffweitealterTitleX);
+    var griffweitealter = svg.selectAll('.griffweitealter')
+      .data(griffweitealterData);
 
-    griffweite.enter().append('text')
+    griffweitealter.enter().append('text')
       .attr('class', 'griffweitealter')
       .attr('x', function (d) { return griffweitealterTitleX[d]; })
       .attr('y', 65)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
     }    
+  
+    //* ------------------------------------------------------------------
+//
+// Griffweitegeschlecht
+//
+//
+// -----------------------------------------------------------------*/
+  
+  
+   function splitBubblesintoGriffweitegeschlecht() {
+    showGriffweitegeschlecht();
+    hideYear();
+    hideSex();
+    hideAgecat();
+    hideScreentime();
+    hideSorgen();
+     hideGriffweite();
+     hideGriffweitealter();
+  
+
+    force.on('tick', function (e) {
+      bubbles.each(moveToGriffweitegeschlecht(e.alpha))
+        .attr('cx', function (d) { return d.x; })
+        .attr('cy', function (d) { return d.y; });
+    });
+
+    force.start();
+  }
+
+  function moveToGriffweitegeschlecht(alpha) {
+    return function (d) {
+      var target = griffweitegeschlechtCenters[d.griffweitegeschlecht];
+      d.x = d.x + (target.x - d.x) * damper * alpha * 1.1;
+      d.y = d.y + (target.y - d.y) * damper * alpha * 1.1;
+    };
+  }
+
+  function hideGriffweitegeschlecht() {
+    svg.selectAll('.griffweitegeschlecht').remove();
+  }
+
+  function showGriffweitegeschlecht() {
+
+    var griffweitegeschlechtData = d3.keys(griffweitegeschlechtTitleX);
+    var griffweitegeschlecht = svg.selectAll('.griffweitegeschlecht')
+      .data(griffweitegeschlechtData);
+
+    griffweitegeschlecht.enter().append('text')
+      .attr('class', 'griffweitegeschlecht')
+      .attr('x', function (d) { return griffweitegeschlechtTitleX[d]; })
+      .attr('y', 65)
+      .attr('text-anchor', 'middle')
+      .text(function (d) { return d; });
+    }    
+
 
    
    
@@ -807,6 +891,8 @@ function moveToAgecat(alpha) {
       splitBubblesintoGriffweite();
         } else if (displayName === 'griffweitealter') {
       splitBubblesintoGriffweitealter();
+       } else if (displayName === 'griffweitegeschlecht') {
+      splitBubblesintoGriffweitegeschlecht();
   
   
     } else {
@@ -839,7 +925,7 @@ function moveToAgecat(alpha) {
 
   var fillColor = d3.scale.ordinal()
     .domain(['1','2','3', '4','5','6'])
-    .range(['#F7CAD0', '#ff006e', '#48CAE4', '#0096C7','#023E8A','#03045E']);
+    .range(['#F7CAD0', '#61ff7e', '#7fc8f8', '#ffc2e2','#ffd972','#fcd29f']);
 
   /* Tooltip-Funktion*/
   function showDetail(d) {
@@ -866,6 +952,11 @@ function moveToAgecat(alpha) {
                  '<span class="name">Ich habe mein handy beim schlafen in griffweite: </span><span class="value">' +
                   d.griffweite +
                   '</span><br/>' +
+        
+        '<span class="name">Ich habe mein handy beim schlafen in griffweite: </span><span class="value">' +
+                  d.griffweite +
+                  '</span><br/>' +
+        
         
   
         
