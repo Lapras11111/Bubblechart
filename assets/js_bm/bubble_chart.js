@@ -191,10 +191,10 @@ var griffweiteCenters = { // Center locations of the bubbles.
   };
 
   var griffweiteTitleX = { // X locations of the year titles.
-    'hat handy beim schlafen immer in Griffweite': 100,
-    'hat handy beim schlafen eher in Griffweite': 400,
-    'hat handy beim schlafen eher nicht in Griffweite': 700,
-    'hat handy nicht in Griffweite beim schlafen': 1000
+    'immer in Griffweite beim schlafen': 100,
+    'eher in Griffweite beim schlafen': 450,
+    'eher nicht in Griffweite beim schlafen': 700,
+    'nicht in Griffweite beim schlafen': 950
   };
   var griffweitealterCenters = { // Center locations of the bubbles.
     1: { x: 300, y: height / 1.8},
